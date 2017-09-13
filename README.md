@@ -1,0 +1,2 @@
+# awesome-talkative
+AwesomeWM logger
