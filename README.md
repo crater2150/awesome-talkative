@@ -12,16 +12,30 @@ is managed by git, I recommend adding this repo as a git submodule:
 
 Then, in your `rc.lua`:
 
+```local talkative = require("talkative")```
+
+or to use a shorter name:
+
 ```local log = require("talkative")```
 
 ## Usage
 
 To log a message, call one of the following methods:
 
-- `talkative.dbg(msg)`, log level `DEBUG` (lowest)
-- `talkative.log(msg)`, log level `NORMAL`
-- `talkative.warn(msg)`, log level `WARNING`
-- `talkative.error(msg)`, log level `ERROR` (highest)
+- `log.dbg(msg)`, log level `DEBUG` (lowest)
+- `log.log(msg)`, log level `NORMAL`
+- `log.warn(msg)`, log level `WARNING`
+- `log.error(msg)`, log level `ERROR` (highest)
+
+As a shorthand, the module can be called directly, causing a message to be
+logged with level `NORMAL`:
+
+```lua
+local log = require("talkative")
+log("Hello")
+```
+
+## Declaring loggers
 
 To see the message, you must declare loggers in your `rc.lua` using
 `add_logger(logger, level)`:
