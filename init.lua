@@ -64,7 +64,7 @@ end
 
 function talkative.spawn(command)
 	talkative.dbg("Executing: " .. command)
-	awful.util.spawn(command)
+	awful.spawn(command)
 end
 
 function talkative.loggers.stdio(msg, severity)
