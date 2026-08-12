@@ -1,27 +1,27 @@
 local naughty = require("naughty")
 local awful = require("awful")
 
-local talkative = { loggers = {}, mt = {}}
+local talkative = { loggers = {}, mt = {} }
 
 local defaults = {}
 local settings = {}
 
-defaults.loggers = { }
+defaults.loggers = {}
 defaults.defaultlevel = 0
 
 for key, value in pairs(defaults) do
-    settings[key] = value
+	settings[key] = value
 end
 
 talkative.level = {
 	ERROR = 3,
 	WARNING = 2,
 	NORMAL = 1,
-	DEBUG = 0
+	DEBUG = 0,
 }
 
 local function loglv(msg, level)
-	for _,logger in ipairs(settings.loggers) do
+	for _, logger in ipairs(settings.loggers) do
 		logger(msg, level)
 	end
 end
@@ -55,11 +55,11 @@ end
 
 function talkative.loggers.naughty(msg, severity)
 	if severity == talkative.level.WARNING then
-		msg = "<span color=\"#ff6\">".. msg .. "</span>"
+		msg = '<span color="#ff6">' .. msg .. "</span>"
 	elseif severity == talkative.level.ERROR then
-		msg = "<span color=\"#f66\">".. msg .. "</span>"
+		msg = '<span color="#f66">' .. msg .. "</span>"
 	end
-	naughty.notify({ text = msg })
+	naughty.notification({ text = msg })
 end
 
 function talkative.spawn(command)
@@ -71,7 +71,8 @@ function talkative.loggers.stdio(msg, severity)
 	print(msg)
 end
 
-
-talkative.mt.__call = function(t,message) talkative.log(message) end
+talkative.mt.__call = function(t, message)
+	talkative.log(message)
+end
 
 return setmetatable(talkative, talkative.mt)
